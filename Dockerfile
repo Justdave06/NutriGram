@@ -24,4 +24,4 @@ RUN npm run build \
 
 EXPOSE $PORT
 
-CMD ["bash", "start.sh"]
+CMD ["sh", "start.sh"]
