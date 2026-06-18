@@ -1,4 +1,4 @@
-FROM php:8.3-cli-alpine
+FROM php:8.4-cli-alpine
 
 RUN apk add --no-cache curl unzip git nodejs npm sqlite sqlite-dev \
     && docker-php-ext-install pdo_sqlite
