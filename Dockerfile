@@ -8,14 +8,15 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 COPY composer.json composer.lock ./
-RUN composer install --no-interaction --optimize-autoloader --no-dev
+RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts
 
 COPY package.json package-lock.json ./
 RUN npm install && npm run build
 
 COPY . .
 
-RUN cp .env.example .env \
+RUN composer dump-autoload \
+    && cp .env.example .env \
     && php artisan key:generate \
     && php artisan storage:link \
     && chmod -R 777 storage bootstrap/cache
