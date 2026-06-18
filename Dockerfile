@@ -1,6 +1,6 @@
 FROM php:8.3-cli-alpine
 
-RUN apk add --no-cache curl unzip git nodejs npm sqlite \
+RUN apk add --no-cache curl unzip git nodejs npm sqlite sqlite-dev \
     && docker-php-ext-install pdo_sqlite
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
