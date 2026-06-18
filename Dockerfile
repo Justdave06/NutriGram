@@ -11,11 +11,12 @@ COPY composer.json composer.lock ./
 RUN composer install --no-interaction --optimize-autoloader --no-dev --no-scripts
 
 COPY package.json package-lock.json ./
-RUN npm install && npm run build
+RUN npm install
 
 COPY . .
 
-RUN composer dump-autoload \
+RUN npm run build \
+    && composer dump-autoload \
     && cp .env.example .env \
     && php artisan key:generate \
     && php artisan storage:link \
